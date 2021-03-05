@@ -69,7 +69,7 @@ class Player(object):
         >>> me.take('Hotdog')
         Hotdog is not here.
         >>> type(me.backpack[0])
-        <class 'Thing'>
+        <class '__main__.Thing'>
         """
         if type(thing) != str:
             print('Thing should be a string.')
@@ -77,7 +77,7 @@ class Player(object):
             self.backpack.append(self.place.take(thing))
             print(self.name + " takes the " + thing)
         else:
-            print(thing + " is not here")
+            print(thing + " is not here.")
 
     def check_backpack(self):
         """Print each item with its description and return a list of item names.
@@ -375,7 +375,7 @@ Congratulations! You won the adventure game!
 import doctest
 
 if __name__ == '__main__':
-#    doctest.testmod(verbose=True)
+    doctest.testmod(verbose=True)
     read_eval_print_loop()
 
 # if __name__ == "__main__":
