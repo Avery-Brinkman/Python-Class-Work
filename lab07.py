@@ -1,3 +1,7 @@
+_author_ = "Avery Brinkman"
+_credits_ = [""]
+_email_ = "brinkmae@mail.uc.edu"
+
 # CS2021 - Lab07
 # A "simple" adventure game.
 
@@ -373,10 +377,6 @@ Congratulations! You won the adventure game!
 """
 
 import doctest
-
 if __name__ == '__main__':
     doctest.testmod(verbose=True)
     read_eval_print_loop()
-
-# if __name__ == "__main__":
-#   doctest.testmod(verbose=True)
