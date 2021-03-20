@@ -155,15 +155,6 @@ def delete(t, target):
             retb += [delete(b, target)]
     return tree(root(t), retb)
 
-
-
-
-
-    
-
-    
-
-
 import doctest
 if __name__ == '__main__':
     doctest.testmod(verbose=True)
