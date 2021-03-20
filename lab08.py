@@ -1,5 +1,5 @@
 _author_ = "Avery Brinkman"
-_credits_ = [""]
+_credits_ = ["https://stackoverflow.com/questions/31371972/count-number-of-leaf-nodes-in-a-generic-tree","John Whiting"]
 _email_ = "brinkmae@mail.uc.edu"
 
 ## Lab 8: Trees ##
@@ -21,7 +21,15 @@ def make_pytunes(username):
         darude
           sandstorm
     """
-    "*** YOUR CODE HERE ***"
+    return tree(username,
+                [tree("pop",
+                      [tree("justin bieber",
+                            [tree("single",
+                                  [tree("what do you mean?")])]),
+                       tree("2015 pop mashup")]),
+                tree("trance",
+                      [tree("darude",
+                            [tree("sandstorm")])])])
 
 def num_songs(t):
     """Return the number of songs in the pyTunes tree, t.
@@ -30,7 +38,15 @@ def num_songs(t):
     >>> num_songs(pytunes)
     3
     """
-    "*** YOUR CODE HERE ***"
+    leaves = 0
+    if is_leaf(t):
+        return 1
+    for brnch in branches(t):
+        leaves += num_songs(brnch)
+    return leaves
+        
+
+
 
 def add_song(t, song, category):
     """Returns a new tree with SONG added to CATEGORY. Assume the CATEGORY
@@ -49,7 +65,11 @@ def add_song(t, song, category):
           georgia
 
     """
-    "*** YOUR CODE HERE ***"
+    if root(t) == category:
+        return tree(root(t), branches(t) + [tree(song)])
+    for brnch in branches(t):
+        return tree(root(t), [add_song(brnch, song, category)])
+
 
 # Tree ADT
 def tree(root, branches=[]):
@@ -129,7 +149,20 @@ def delete(t, target):
         gangnam style
         wedding dress
     """
-    "*** YOUR CODE HERE ***"
+    retb = []
+    for b in branches(t):
+        if root(b) != target:
+            retb += [delete(b, target)]
+    return tree(root(t), retb)
+
+
+
+
+
+    
+
+    
+
 
 import doctest
 if __name__ == '__main__':
