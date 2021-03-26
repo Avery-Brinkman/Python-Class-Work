@@ -16,6 +16,8 @@ def step(inputWord):
     for i in range(65, 91):
         checkWords.append(inputWord + chr(i))
     for w in words:
+        if len(w) != len(inputWord)+1:
+            continue
         for cW in checkWords:
             if sorted(w) == sorted(cW):
                 outWords += [w]
