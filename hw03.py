@@ -11,6 +11,8 @@ from urllib.request import urlopen
 wordfile = urlopen(url)
 words = wordfile.read().decode('utf-8').upper().split()
 
+print("Prev: 1.32")
+
 checkWords = []
 for i in range(65, 91):
     checkWords.append(chr(i))
@@ -21,9 +23,15 @@ def step(inputWord):
 
     outWords = []
     for w in words:
+
         if len(w) != len(inputWord)+1:
             continue
+
         for cW in checkWords:
+
+            if cW not in w:
+                continue
+
             if sorted(w) == sorted(inputWord + cW):
                 outWords += [w]
 
