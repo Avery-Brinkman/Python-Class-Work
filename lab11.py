@@ -25,7 +25,32 @@ def merge(s0, s1):
     """
     i0, i1 = iter(s0), iter(s1)
     e0, e1 = next(i0, None), next(i1, None)
-    "*** YOUR CODE HERE ***"
+
+    while True:
+        if e0 != None and e1 != None:
+            if e0 < e1:
+                yield e0
+                e0 = next(i0, None)
+            elif e1 < e0:
+                yield e1
+                e1 = next(i1, None)
+            else:
+                yield e0
+                e0 = next(i0, None)
+                e1 = next(i1, None)
+        elif e0 == None and e1 == None:
+            return 
+            #raise StopIteration
+        else:
+            if e0 == None:
+                yield e1
+                e1 = next(i1, None)
+            else:
+                yield e0
+                e0 = next(i0, None)
+              
+    
+
 
 #RQ2
 def residues_generator(m):
@@ -50,7 +75,15 @@ def residues_generator(m):
     7
     11
     """
-    "*** YOUR CODE HERE ***"
+    def mults(start, factor):
+        while True:
+            yield start
+            start += factor
+
+    for gen in range(m):
+        yield mults(gen, m)
+
+
 
 #RQ3
 def zip(*iterables):
@@ -65,7 +98,21 @@ def zip(*iterables):
     [1, 4, 7]
     [2, 5, 8]
     """
-    "*** YOUR CODE HERE ***"
+    
+    lengths = []
+    for i in iterables: lengths.append(len(i))
+    
+    index = 0
+    while True:
+        returnList = []
+        for item in iterables:
+            returnList.append(item[index])
+        yield returnList
+        index += 1
+        if index >= min(lengths):
+            return
+        
+
 
 # RQ4 Coroutines Question
 def supplier(ingredients, chef):
@@ -131,11 +178,24 @@ def chef(customers, dishes):
         ingredients.add(ingredient)
 
         if not remaining_customers:
-            print('No one left to serve!')
-            return
+            return 'No one left to serve!'
       
         for customer, dish_name in dict(remaining_customers).items():
-          # include an if-statement to check 
-          # if all ingredients for dish are available to chef
-          # so that the customer is ready to be served
-          "*** YOUR CODE HERE ***"
+            # include an if-statement to check 
+            # if all ingredients for dish are available to chef
+            # so that the customer is ready to be served
+
+            canMake = True
+            for neededIngredient in dishes[dish_name]:
+                if neededIngredient not in ingredients:
+                    canMake = False
+
+            if canMake:
+                customer.send(dish_name)
+                remaining_customers.pop(customer)
+
+
+import doctest
+if __name__ == '__main__':
+    doctest.testmod(verbose=True)
+
